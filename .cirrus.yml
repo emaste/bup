@@ -1,4 +1,7 @@
 
+# By default, "image:" refers to the docker registry,
+# e.g. https://hub.docker.com/_/debian
+
 task:
   name: debian check/lint root
   container:
@@ -7,6 +10,8 @@ task:
     memory: 2
   script: |
     set -xe
+    mount
+    ls -ld /tmp
     dev/prep-for-debianish-build python3
     dev/system-info
     BUP_PYTHON_CONFIG=python3-config ./configure --with-pylint=yes
